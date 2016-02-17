@@ -1,2 +1,6 @@
-##Visual Stuidio local settings
+##Visual Studio local settings
 .vs
+
+#bin and obj folders
+bin/
+obj/
