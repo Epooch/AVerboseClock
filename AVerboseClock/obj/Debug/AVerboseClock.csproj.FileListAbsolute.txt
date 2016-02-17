@@ -1,1 +1,6 @@
 E:\GitProjects\AVerboseClock\AVerboseClock\bin\Debug\AVerboseClock.exe.config
+E:\GitProjects\AVerboseClock\AVerboseClock\bin\Debug\AVerboseClock.exe
+E:\GitProjects\AVerboseClock\AVerboseClock\bin\Debug\AVerboseClock.pdb
+E:\GitProjects\AVerboseClock\AVerboseClock\obj\Debug\AVerboseClock.csprojResolveAssemblyReference.cache
+E:\GitProjects\AVerboseClock\AVerboseClock\obj\Debug\AVerboseClock.exe
+E:\GitProjects\AVerboseClock\AVerboseClock\obj\Debug\AVerboseClock.pdb
