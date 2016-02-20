@@ -16,6 +16,8 @@ namespace AVerboseClock
         {
             string strProjectTitle = "aVerboseClock";
             SetProjectTitle(strProjectTitle);
+            Console.WriteLine("To come to a stopping point at any time use the 'end' key.");
+            Console.WriteLine("");
 
             var endTimeLoopKey = ConsoleKey.End;
             #region GetDate()
@@ -23,14 +25,10 @@ namespace AVerboseClock
             {
                 while (!Console.KeyAvailable)
                 {
-                    var strHour = string.Empty;
-                    strHour = GetHour();
+                    
+                    var strVerboseTime = GetVerboseTime();
 
-                    var strMinutes = string.Empty;
-                    strMinutes = GetMinutes();
-
-                    Console.WriteLine(strMinutes + strHour);
-                    Console.WriteLine("To come to a stopping point at any time use the 'end' key.");
+                    Console.WriteLine(strVerboseTime);
                     //Adds a pause of 5 seconds.
                     Thread.Sleep(5000);
                 }
@@ -38,54 +36,75 @@ namespace AVerboseClock
             #endregion
         }
 
-        private static string GetMinutes()
+        private static string GetVerboseTime()
         {
-            var strMinutes = string.Empty;
+            var its = "It's ";
+            var past = "Past ";
+            var oClock = " O'Clock";
+            //var strA = "a ";
+            var strTo = "to ";
+            var minutes = "minutes ";
+            var half = "Half ";
+
+            var strOne = "One ";
+            var strTwo = "Two ";
+            var strThree = "Three ";
+            var strFour = "Four ";
+            var strFive = "Five ";
+            var strSix = "Six ";
+            var strSeven = "Seven ";
+            var strEight = "Eight ";
+            var strNine = "Nine ";
+            var strTen = "Ten ";
+            //var strEleven = "Eleven ";
+            //var strTwelve = "Twelve";
+            var strQuarter = "a Quarter ";
+            var strTwenty = "Twenty ";
+
+            int currentHour = DateTime.Now.Hour;
             int currentMinutes = DateTime.Now.Minute;
-            Console.WriteLine(currentMinutes);
-            if (currentMinutes == 0 || currentMinutes < 5) return "o'clock";
+
             if (currentMinutes < 30)
             {
-                if (currentMinutes == 5 || currentMinutes < 10) return "Five.Past";
-                if (currentMinutes == 10 || currentMinutes < 15) return "Ten.Past";
-                if (currentMinutes == 15 || currentMinutes < 20) return "Quarter.Past";
-                if (currentMinutes == 20 || currentMinutes < 25) return "Twenty.Past";
-                if (currentMinutes == 25 || currentMinutes < 30) return "Twenty.Five.Past";
+                //GetHourNow
+                if (currentMinutes == 0 || currentMinutes < 5) return its + GetHour(currentHour) + oClock;
+                if (currentMinutes == 5 || currentMinutes < 10) return strFive + past + GetHour(currentHour);
+                if (currentMinutes == 10 || currentMinutes < 15) return strTen + past + GetHour(currentHour);
+                if (currentMinutes == 15 || currentMinutes < 20) return strQuarter + past + GetHour(currentHour);
+                if (currentMinutes == 20 || currentMinutes < 25) return strTwenty + past + GetHour(currentHour);
+                if (currentMinutes == 25 || currentMinutes < 30) return strTwenty + strFive + past + GetHour(currentHour);
             }
-            if (currentMinutes == 30 || currentMinutes < 35) return "half.Past";
+            if (currentMinutes == 30 || currentMinutes < 35) return half + past + GetHour(currentHour);
             if (currentMinutes > 30)
             {
-                if (currentMinutes == 35 || currentMinutes < 40) return "Twenty.Five.To";
-                if (currentMinutes == 40 || currentMinutes < 45) return "Twenty.To";
-                if (currentMinutes == 45 || currentMinutes < 50) return "Quarter.To";
-                if (currentMinutes == 50) return "Ten.To";
+                if (currentMinutes == 35 || currentMinutes < 40) return its + strTwenty + strFive + minutes + strTo + GetHour(currentHour + 1);
+                if (currentMinutes == 40 || currentMinutes < 45) return its + strTwenty + strTo + GetHour(currentHour + 1);
+                if (currentMinutes == 45 || currentMinutes < 50) return its + strQuarter + strTo + GetHour(currentHour + 1);
+                if (currentMinutes == 50) return strTen + strTo + GetHour(currentHour + 1); //minus 1
                 else //Minutes are added to this output now.
                     if (currentMinutes < 60)
                     {
-                        if (currentMinutes == 51) return "Nine.Minutes.To";
-                        if (currentMinutes == 52) return "Eight.Minutes.To";
-                        if (currentMinutes == 53) return "Seven.Minutes.To";
-                        if (currentMinutes == 54) return "Six.Minutes.To";
-                        if (currentMinutes == 55) return "Five.Minutes.To";
-                        if (currentMinutes == 56) return "Four.Minutes.To";
-                        if (currentMinutes == 57) return "Three.Minutes.To";
-                        if (currentMinutes == 58) return "Two.Minutes.To";
-                        if (currentMinutes == 59) return "One.Minute.Until";
+                        if (currentMinutes == 51) return strNine + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 52) return strEight + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 53) return strSeven + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 54) return strSix + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 55) return strFive + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 56) return strFour + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 57) return strThree + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 58) return strTwo + minutes + strTo + GetHour(currentHour + 1);
+                        if (currentMinutes == 59) return strOne + "minute " + "until " + GetHour(currentHour + 1);
                     }
                     else
                     {//If for some reason this all fails just 
                         throw new NotImplementedException();
                     } 
             }
-            return strMinutes;
+            return string.Empty;
         }
 
-        private static string GetHour()
+        private static string GetHour(int currentHour)
         {
-            int currentHour;
             string strHour = string.Empty;
-            currentHour = DateTime.Now.Hour;
-            Console.WriteLine(currentHour);
 
             if (currentHour > 12)
             {
@@ -99,46 +118,32 @@ namespace AVerboseClock
             switch (currentHour)
             {
                 case 1:
-                    strHour = ".one";
-                    break;
+                    return strHour = "One";
                 case 2:
-                    strHour = ".two";
-                    break;
+                    return strHour = "Two";
                 case 3:
-                    strHour = ".three";
-                    break;
+                    return strHour = "Three";
                 case 4:
-                    strHour = ".four";
-                    break;
+                    return strHour = "Four";
                 case 5:
-                    strHour = ".five";
-                    break;
+                    return strHour = "Five";
                 case 6:
-                    strHour = ".six";
-                    break;
+                    return strHour = "Six";
                 case 7:
-                    strHour = ".seven";
-                    break;
+                    return strHour = "Seven";
                 case 8:
-                    strHour = ".eight";
-                    break;
+                    return strHour = "Eight";
                 case 9:
-                    strHour = ".nine";
-                    break;
+                    return strHour = "Nine";
                 case 10:
-                    strHour = ".ten";
-                    break;
+                    return strHour = "Ten";
                 case 11:
-                    strHour = ".eleven";
-                    break;
+                    return strHour = "Eleven";
                 case 12:
-                    strHour = ".twelve";
-                    break;
+                    return strHour = "Twelve";
                 default:
-                    strHour = ".twelve";
-                    break;
+                    return strHour = ".twelve";
             }
-            return strHour;
         }
 
         private static void SetProjectTitle(string strProjectTitle)
